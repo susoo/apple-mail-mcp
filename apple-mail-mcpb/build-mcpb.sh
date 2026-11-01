@@ -86,17 +86,6 @@ else
     exit 1
 fi
 
-# Copy UI Module
-echo -e "\n${YELLOW}Step 5c: Copying UI Module...${NC}"
-if [ -d "${SOURCE_DIR}/ui" ]; then
-    cp -r "${SOURCE_DIR}/ui" "${BUILD_DIR}/"
-    # Remove __pycache__ if exists
-    rm -rf "${BUILD_DIR}/ui/__pycache__"
-    echo -e "  ${GREEN}✓${NC} UI Module included (MCP Apps dashboard support)"
-else
-    echo -e "  ${YELLOW}⚠${NC} UI directory not found (optional, skipping)"
-fi
-
 # Note: Virtual environment will be created on user's machine during first run
 echo -e "\n${YELLOW}Step 6: Skipping venv creation (will be created on user's machine)...${NC}"
 echo -e "  ${GREEN}✓${NC} Venv will be initialized automatically on first run using user's Python installation"

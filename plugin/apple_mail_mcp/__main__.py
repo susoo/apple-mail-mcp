@@ -48,6 +48,19 @@ def _remove_tool(mcp, name: str) -> None:
         pass
 
 
+MUTATING_TOOLS = [
+    "compose_email",
+    "reply_to_email",
+    "forward_email",
+    "create_rich_email_draft",
+    "manage_drafts",
+    "move_email",
+    "update_email_status",
+    "manage_trash",
+    "create_mailbox",
+]
+
+
 def main():
     _start_orphan_watcher()
 
@@ -55,9 +68,9 @@ def main():
     parser.add_argument(
         "--read-only",
         action="store_true",
-        help="Block sending email. compose_email and reply_to_email stay "
-             "available for mode=\"draft\" and mode=\"open\"; forward_email is "
-             "removed because it has no non-sending mode.",
+        help="Remove every tool that sends, drafts, moves, flags, deletes or "
+             "creates anything in Mail. Local file writes (save_email_attachment, "
+             "export_emails) remain, restricted by --write-dir.",
     )
     parser.add_argument(
         "--write-dir",
@@ -83,14 +96,8 @@ def main():
 
     from apple_mail_mcp import mcp  # noqa: E402
 
-    # Tools without a non-sending mode are removed entirely under --read-only.
-    # compose_email and reply_to_email stay registered because their "draft"
-    # and "open" modes never deliver anything; they refuse mode="send"
-    # themselves. Removing them would also take away attachment support, which
-    # exists nowhere else in the compose surface.
-    SEND_ONLY_TOOLS = ["forward_email"]
     if args.read_only:
-        for name in SEND_ONLY_TOOLS:
+        for name in MUTATING_TOOLS:
             _remove_tool(mcp, name)
 
     mcp.run()

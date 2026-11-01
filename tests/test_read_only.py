@@ -5,7 +5,7 @@ import unittest
 
 from fastmcp import FastMCP
 
-from apple_mail_mcp.__main__ import _remove_tool
+from apple_mail_mcp.__main__ import MUTATING_TOOLS, _remove_tool
 
 
 def _tool_names(server: FastMCP) -> set[str]:
@@ -32,6 +32,12 @@ class RemoveToolTests(unittest.TestCase):
     def test_ignores_unknown_tool(self):
         _remove_tool(self.server, "does_not_exist")
         self.assertEqual(_tool_names(self.server), {"send_it", "read_it"})
+
+
+class MutatingToolsTests(unittest.TestCase):
+    def test_every_mutating_tool_is_registered(self):
+        from apple_mail_mcp import mcp
+        self.assertTrue(set(MUTATING_TOOLS) <= _tool_names(mcp))
 
 
 if __name__ == "__main__":

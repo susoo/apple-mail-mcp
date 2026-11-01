@@ -155,7 +155,6 @@ claude mcp add apple-mail -- /bin/bash $(pwd)/start_mcp.sh
 |------|-------------|
 | `get_statistics` | Email analytics (volume, top senders, read ratios) |
 | `export_emails` | Export single emails or mailboxes to TXT/HTML |
-| `inbox_dashboard` | Interactive UI dashboard (requires mcp-ui-server) |
 
 ## Configuration
 
@@ -266,7 +265,7 @@ cp -r plugin/skills/email-management ~/.claude/skills/email-management
 
 - macOS with Apple Mail configured
 - Python 3.7+
-- `fastmcp` (+ optional `mcp-ui-server` for dashboard)
+- `fastmcp`
 - Claude Desktop or any MCP-compatible client
 - Mail.app permissions: Automation + Mail Data Access (grant in **System Settings > Privacy & Security > Automation**)
 

@@ -139,10 +139,6 @@
     {
       "name": "export_emails",
       "description": "Export emails to txt or html. Single email or entire mailbox (capped at 1000). Configurable save location."
-    },
-    {
-      "name": "inbox_dashboard",
-      "description": "Interactive UI dashboard for MCP Apps-compatible clients. Shows account cards, recent emails, and search. Requires mcp-ui-server."
     }
   ],
   "prompts": []
